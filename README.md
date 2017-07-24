@@ -1,3 +1,4 @@
+```javascript
 ;(function($){
 	$(function()
 	{
@@ -81,3 +82,4 @@
 		);
 	});
 })(jQuery);
+```
