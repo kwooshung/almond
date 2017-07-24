@@ -1,35 +1,83 @@
-# 反思层次设计涵盖诸多领域，他与信息、文化以及产品的含义和用途息息相关：
-  非常有幸能够在前端网策划一个小活动，其实情感化设计并没有那么悬乎，当然想做好也是需要用心的。这也是一个高阶设计师所必备的一项技能。
+;(function($){
+	$(function()
+	{
+		var container = BODY.find('main.container');
+		var content = container.find('#content');
+		var sidebar = container.find('aside');
+		var info_content = content.find('.info_content');
+		var article_md_view = content.find('article.md_view');
+		var popover_original_nolink = content.find('#popover_original_nolink');
+		var copyright_bar = info_content.find('#copyright_bar');
+		var copyright_bar_svg = copyright_bar.find('svg');
+		var copyright_bar_type = '';
 
-## 本文目的：
-  帮助同学们了解情感化设计，并实际的运用于产品中来。希望大家可以积极参与活动，锻炼自己的思考及动手能力。同时上首页的小伙伴可以获赠本人自制的限量版手机壳一份（目前只有iphone的）
+		copyright_bar_svg.each
+		(
+			function(inx, elem)
+			{
+				_this = $(elem);
 
-### 作业形式：
-  为一款app（类型不限）设计一个空态页面：“无网络”；一个通知确认页面“开启app推送”；一个启动页：可以任选一个节日，例如最近的“儿童节”等等。（尺寸：750x1334）
-  
-#### 写在前面：
-  非常有幸能够在前端网策划一个小活动，其实情感化设计并没有那么悬乎，当然想做好也是需要用心的。这也是一个高阶设计师所必备的一项技能。
+				copyright_bar_type = _this.data("type");
 
-##### 本文目的：
-  帮助同学们了解情感化设计，并实际的运用于产品中来。希望大家可以积极参与活动，锻炼自己的思考及动手能力。同时上首页的小伙伴可以获赠本人自制的限量版手机壳一份（目前只有iphone的）
+				_this.popover
+				({
+					'container':'body',
+					'html':true,
+					'title':copyright.text[copyright_bar_type].title,
+					'content':$.utils.isObject(copyright.text[copyright_bar_type].info, 'function') ? copyright.text[copyright_bar_type].info(ARTICLE_UID, ARTICLE_USERNAME) : copyright.text[copyright_bar_type].info,
+					'template':'<div class="popover shadow popover-copyright-' + copyright_bar_type + '" role="tooltip"><h3 class="popover-title font12"></h3><div class="popover-content text-muted font12"></div></div>',
+					'placement':'top',
+					'delay':{'show':200, 'hide':200},
+					'trigger':'manual'
+				});
 
-###### 作业形式：
-  为一款app（类型不限）设计一个空态页面：“无网络”；一个通知确认页面“开启app推送”；一个启动页：可以任选一个节日，例如最近的“儿童节”等等。（尺寸：750x1334）
-  
-# 写在前面：
-  非常有幸能够在前端网策划一个小活动，其实情感化设计并没有那么悬乎，当然想做好也是需要用心的。这也是一个高阶设计师所必备的一项技能。
+				if(copyright_bar_type == 'business')
+				{
+					popover_hover_events
+					(
+						_this, 'popover-copyright-' + copyright_bar_type, function(_this, elem)
+						{
+							send_message(null, elem);
+						}
+					);
+				}
+				else
+				{
+					popover_hover_events(_this, 'popover-copyright-' + copyright_bar_type);
+				}
+			}
+		);
 
-## 本文目的：
-  帮助同学们了解情感化设计，并实际的运用于产品中来。希望大家可以积极参与活动，锻炼自己的思考及动手能力。同时上首页的小伙伴可以获赠本人自制的限量版手机壳一份（目前只有iphone的）
+		var popover_nolink = "<span>因转载多次，原地址不详！您若知道原地址，请联系</span><a href='javascript:;' class='primary hand' data-toggle='sendmsg' data-event='false' data-touid='" + ARTICLE_UID + "'>" + ARTICLE_USERNAME + "</a><span>，谢谢。</span>";
+		if(popover_original_nolink.length > 0)
+		{
+			popover_original_nolink.popover
+			({
+				'container':'body',
+				'html':true,
+				'title':'为尊重作者，特此声明：',
+				'content':popover_nolink,
+				'template':'<div class="popover shadow popover-original-nolink" role="tooltip"><h3 class="popover-title font12"></h3><div class="popover-content text-muted font12"></div></div>',
+				'placement':'top',
+				'delay':{'show':200, 'hide':200},
+				'trigger':'manual'
+			});
 
-### 作业形式：
-  为一款app（类型不限）设计一个空态页面：“无网络”；一个通知确认页面“开启app推送”；一个启动页：可以任选一个节日，例如最近的“儿童节”等等。（尺寸：750x1334）
-  
-#### 写在前面：
-  非常有幸能够在前端网策划一个小活动，其实情感化设计并没有那么悬乎，当然想做好也是需要用心的。这也是一个高阶设计师所必备的一项技能。
+			popover_hover_events(popover_original_nolink, 'popover-original-nolink', function(_this, elem){send_message(null, elem);});
+		}
 
-##### 本文目的：
-  帮助同学们了解情感化设计，并实际的运用于产品中来。希望大家可以积极参与活动，锻炼自己的思考及动手能力。同时上首页的小伙伴可以获赠本人自制的限量版手机壳一份（目前只有iphone的）
-
-###### 作业形式：
-  为一款app（类型不限）设计一个空态页面：“无网络”；一个通知确认页面“开启app推送”；一个启动页：可以任选一个节日，例如最近的“儿童节”等等。（尺寸：750x1334）
+		flowcharts.refresh(article_md_view);
+		flowcharts.zoom(article_md_view);
+		sequence.refresh(article_md_view);
+		sequence.zoom(article_md_view);
+		// article_md_view.find('pre[data-codetype]').each
+		BODY.find('pre[data-codetype]').each
+		(
+			function(inx, elem)
+			{
+				elem = $(elem);
+				codebox.precode.create(elem, elem.data("codetype"));
+			}
+		);
+	});
+})(jQuery);
