@@ -2,7 +2,10 @@
 ;(function($){
 	$(function()
 	{
-		var container = BODY.find('main.container');
+		/*
+		 * 看你怎么说
+		 */
+		var container = BODY.find('main.container');//定义一个变量
 		var content = container.find('#content');
 		var sidebar = container.find('aside');
 		var info_content = content.find('.info_content');
@@ -26,7 +29,7 @@
 					'html':true,
 					'title':copyright.text[copyright_bar_type].title,
 					'content':$.utils.isObject(copyright.text[copyright_bar_type].info, 'function') ? copyright.text[copyright_bar_type].info(ARTICLE_UID, ARTICLE_USERNAME) : copyright.text[copyright_bar_type].info,
-					'template':'<div class="popover shadow popover-copyright-' + copyright_bar_type + '" role="tooltip"><h3 class="popover-title font12"></h3><div class="popover-content text-muted font12"></div></div>',
+					'template':'&lt;div class="popover shadow popover-copyright-' + copyright_bar_type + '" role="tooltip"&gt;&lt;h3 class="popover-title font12"&gt;&lt;/h3&gt;&lt;div class="popover-content text-muted font12"&gt;&lt;/div&gt;&lt;/div&gt;',
 					'placement':'top',
 					'delay':{'show':200, 'hide':200},
 					'trigger':'manual'
@@ -49,8 +52,8 @@
 			}
 		);
 
-		var popover_nolink = "<span>因转载多次，原地址不详！您若知道原地址，请联系</span><a href='javascript:;' class='primary hand' data-toggle='sendmsg' data-event='false' data-touid='" + ARTICLE_UID + "'>" + ARTICLE_USERNAME + "</a><span>，谢谢。</span>";
-		if(popover_original_nolink.length > 0)
+		var popover_nolink = "&lt;span&gt;因转载多次，原地址不详！您若知道原地址，请联系&lt;/span&gt;&lt;a href='javascript:;' class='primary hand' data-toggle='sendmsg' data-event='false' data-touid='" + ARTICLE_UID + "'&gt;" + ARTICLE_USERNAME + "&lt;/a&gt;&lt;span&gt;，谢谢。&lt;/span&gt;";
+		if(popover_original_nolink.length &gt; 0)
 		{
 			popover_original_nolink.popover
 			({
@@ -58,7 +61,7 @@
 				'html':true,
 				'title':'为尊重作者，特此声明：',
 				'content':popover_nolink,
-				'template':'<div class="popover shadow popover-original-nolink" role="tooltip"><h3 class="popover-title font12"></h3><div class="popover-content text-muted font12"></div></div>',
+				'template':'&lt;div class="popover shadow popover-original-nolink" role="tooltip"&gt;&lt;h3 class="popover-title font12"&gt;&lt;/h3&gt;&lt;div class="popover-content text-muted font12"&gt;&lt;/div&gt;&lt;/div&gt;',
 				'placement':'top',
 				'delay':{'show':200, 'hide':200},
 				'trigger':'manual'
